@@ -1,4 +1,4 @@
-# objdetetcion
+# Object Detection App (Under Development)
 
 A new Flutter project.
 
