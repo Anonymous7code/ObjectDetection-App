@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  
 
   @override
   _HomeState createState() => _HomeState();
@@ -14,24 +14,21 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   bool isWorking = false;
   String result = '';
-
-  late CameraController _cameraController;
-  late CameraImage _imageCamera;
-
+  late CameraController cameraController;
+  late CameraImage imageCamera;
   initCamera() {
-    
-    _cameraController = CameraController(cameras[0], ResolutionPreset.medium);
-  
-    _cameraController.initialize().then((value) {
+    cameraController = CameraController(cameras[0], ResolutionPreset.medium);
+
+    cameraController.initialize().then((value) {
       if (!mounted) {
         return;
       }
 
       setState(() {
-        _cameraController.startImageStream((imagesFromStream) {
+        cameraController.startImageStream((imagesFromStream) {
           if (!isWorking) {
             isWorking = true;
-            _imageCamera = imagesFromStream;
+            imageCamera = imagesFromStream;
           }
         });
       });
@@ -43,7 +40,9 @@ class _HomeState extends State<Home> {
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              title: Text('Hey'),
+            ),
             body: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -68,7 +67,7 @@ class _HomeState extends State<Home> {
                         margin: EdgeInsets.only(top: 35.0),
                         height: 270.0,
                         width: 360.0,
-                        child: _imageCamera == null
+                        child: imageCamera == null
                             ? Container(
                                 child: Icon(
                                   Icons.camera_front,
@@ -79,8 +78,8 @@ class _HomeState extends State<Home> {
                                 width: 340.0,
                               )
                             : AspectRatio(
-                                aspectRatio: _cameraController.value.aspectRatio,
-                                child: CameraPreview(_cameraController),
+                                aspectRatio: cameraController.value.aspectRatio,
+                                child: CameraPreview(cameraController),
                               ),
                       ),
                     ),
