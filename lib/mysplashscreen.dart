@@ -14,9 +14,9 @@ class _MySplashScreenState extends State<MySplashScreen> {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      seconds: 14,
+      seconds: 5,
       navigateAfterSeconds: Home(),
-      image: Image.asset('assets/logo.png'),
+      imageBackground: Image.asset('assets/image.jpeg').image,
       useLoader: true,
       loaderColor: Colors.red,
       loadingText: Text(
